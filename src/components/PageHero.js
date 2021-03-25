@@ -2,9 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const PageHero = () => {
+const PageHero = ({title}) => {
   return (
-    <h4>page hero</h4>
+    <Wrapper>
+      <div className="section-center">
+        <h3>
+          <Link to="/">Home</Link>/ {title}
+        </h3>
+      </div>
+    </Wrapper>
   );
 };
 
