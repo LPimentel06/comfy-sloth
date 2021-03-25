@@ -3,7 +3,24 @@ import styled from 'styled-components';
 
 const Contact = () => {
   return (
-    <h4>contact section</h4>
+    <Wrapper>
+      <div className="section-center">
+        <h3>Join our newsletter and get 20% off</h3>
+        <div className="content">
+          <p>
+            Magna nulla laboris Lorem nisi.
+            Exercitation in do culpa tempor id enim nulla velit excepteur ea esse.
+            Dolor id reprehenderit mollit veniam nisi ex laborum cupidatat aliqua.
+          </p>
+          <form className="contact-form" action="https://formspree.io/f/mlearpdg" method="POST">
+            <input type="email" className="form-input" placeholder="enter email" name="_replyto" />
+            <button type="submit" className="submit-btn">
+              subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </Wrapper>
   );
 };
 

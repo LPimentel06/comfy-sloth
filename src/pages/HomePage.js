@@ -3,7 +3,12 @@ import { FeaturedProducts, Hero, Services, Contact } from '../components';
 
 const HomePage = () => {
   return (
-    <h4>home page</h4>
+    <main>
+      <Hero />
+      <FeaturedProducts />
+      <Services />
+      <Contact />
+    </main>
   );
 };
 
