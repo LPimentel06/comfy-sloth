@@ -12,7 +12,9 @@ import {
 const filter_reducer = (state, action) => {
   switch(action.type) {
     case LOAD_PRODUCTS:
-      return {...state, allProducts: [...action.payload], filteredProducts: [...action.payload]};
+      let maxPrice = action.payload.map((p) => p.price);
+      maxPrice = Math.max(...maxPrice);
+      return {...state, allProducts: [...action.payload], filteredProducts: [...action.payload], filters: {...state.filters, maxPrice: maxPrice, price: maxPrice}};
     case SET_GRIDVIEW:
       return {...state, gridView: true};
     case SET_LISTVIEW:
@@ -37,6 +39,46 @@ const filter_reducer = (state, action) => {
       }
 
       return {...state, filteredProducts: tempProducts};
+    case UPDATE_FILTERS:
+      const {name, value} = action.payload;
+      return {...state, filters: {...state.filters, [name]: value}};
+    case FILTER_PRODUCTS:
+      const {allProducts} = state;
+      const {text, category, company, color, price, shipping} = state.filters;
+      let tProducts = [...allProducts];
+
+      if(text) {
+        tProducts = tProducts.filter((product) => product.name.toLowerCase().startsWith(text.toLowerCase()));
+      }
+      if(category !== 'all') {
+        tProducts = tProducts.filter((product) => product.category === category);
+      }
+      if(company !== 'all') {
+        tProducts = tProducts.filter((product) => product.company === company);
+      }
+      if(color !== 'all') {
+        tProducts = tProducts.filter((product) => {
+          return product.colors.find((c) => c === color);
+        });
+      }
+      tProducts = tProducts.filter((product) => product.price <= price);
+      if(shipping) {
+        tProducts = tProducts.filter((product) => product.shipping === shipping);
+      }
+
+      return {...state, filteredProducts: tProducts};
+    case CLEAR_FILTERS:
+      return {
+        ...state, filters: {
+          ...state.filters,
+          text: '', 
+          category: 'all', 
+          company: 'all', 
+          color: 'all', 
+          price: state.filters.maxPrice, 
+          shipping: false
+        }
+      };
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }
