@@ -2,9 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import Product from './Product';
 
-const GridView = () => {
+const GridView = ({products}) => {
   return (
-    <h4>Grid View</h4>
+    <Wrapper>
+      <div className="products-container">
+        {
+          products.map((product) => {
+              return (
+                <Product key={product.id} {...product} />
+              );
+          })
+        }
+      </div>
+    </Wrapper>
   );
 };
 
