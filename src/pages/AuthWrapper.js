@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
+import Loading from '../components/Loading';
 
 const AuthWrapper = ({children}) => {
   const {isLoading, error} = useAuth0();
@@ -8,7 +9,7 @@ const AuthWrapper = ({children}) => {
   if(isLoading) {
     return (
       <Wrapper>
-        <h1>Loading...</h1>
+        <Loading />
       </Wrapper>
     );
   }
