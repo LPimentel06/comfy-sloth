@@ -25,7 +25,6 @@ const CartButtons = () => {
       {
         myUser ? (
           <button type="button" className="auth-btn" onClick={() => {
-            clearCart()
             logout({returnTo: window.location.origin})
           }}>
             Logout <FaUserMinus />
